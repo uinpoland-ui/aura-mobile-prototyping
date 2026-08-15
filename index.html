@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mobile App Design Interface — Aura Prototyping System</title>
+  
+  <!-- Fonts: Inter + Geist Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Iconify -->
+  <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
+  
+  <!-- Unicorn Studio v1.4.29 (as specified) -->
+  <script src="https://cdn.jsdelivr.net/gh/hiunicornstudio/unicornstudio.js@v1.4.29/dist/unicornStudio.umd.js"></script>
+  
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            mono: ['Geist Mono', 'monospace'],
+          },
+          colors: {
+            zinc: {
+              700: '#3F3F46',
+            }
+          },
+          boxShadow: {
+            'peach': '0 25px 50px -12px rgba(249, 115, 22, 0.15), 0 12px 24px -8px rgba(0,0,0,0.12), 0 4px 8px -2px rgba(0,0,0,0.08), 0 0 0 1px rgba(249,115,22,0.08), inset 0 1px 0 rgba(255,255,255,0.6)',
+            'glass': '0 8px 32px rgba(0,0,0,0.12), 0 2px 8px rgba(0,0,0,0.08)',
+            'profile': '0 25px 50px -12px rgba(0,0,0,0.4), 0 12px 24px -8px rgba(0,0,0,0.3), 0 0 0 1px rgba(255,255,255,0.08)',
+          }
+        }
+      }
+    }
+  </script>
+  
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #3F3F46;
+    }
+    
+    .font-geist-mono {
+      font-family: 'Geist Mono', monospace;
+    }
+    
+    /* Hide scrollbars while keeping functionality */
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+    
+    /* Custom border gradient via mask for dark profile button */
+    .border-gradient {
+      position: relative;
+      background: #1a1a1a;
+      border-radius: 9999px;
+    }
+    .border-gradient::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: 9999px;
+      padding: 1px;
+      background: linear-gradient(135deg, rgba(255,255,255,0.35), rgba(255,255,255,0.05) 40%, rgba(255,255,255,0.15));
+      -webkit-mask: 
+        linear-gradient(#fff 0 0) content-box, 
+        linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      pointer-events: none;
+    }
+    
+    /* Unicorn background blend */
+    .unicorn-bg {
+      mix-blend-mode: screen;
+      filter: saturate(0);
+      opacity: 0.55;
+      pointer-events: none;
+    }
+    
+    /* Subtle hover scale utility already in Tailwind, but ensure smooth */
+    .transition-smooth {
+      transition: all 200ms ease-in-out;
+    }
+  </style>
+</head>
+<body class="min-h-screen bg-zinc-700 overflow-x-hidden">
+  
+  <!-- Atmospheric Unicorn Studio Background (fixed, blended) -->
+  <div class="fixed inset-0 z-0 unicorn-bg" 
+       data-us-project="oD2QBKj4GohsZCiJ4IWx"
+       data-us-scale="0.6"
+       data-us-dpi="1.2"
+       data-us-production="true"
+       data-us-fps="30"
+       aria-hidden="true">
+  </div>
+  
+  <!-- Main Content -->
+  <div class="relative z-10 min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-10">
+    <div class="w-full max-w-7xl mx-auto">
+      
+      <!-- Three-screen grid -->
+      <div class="grid grid-cols-1 xl:grid-cols-3 gap-10 place-items-center">
+        
+        <!-- ==================== SCREEN 1: Event & Timeline (White) ==================== -->
+        <div class="flex flex-col h-[840px] w-full max-w-sm rounded-3xl relative overflow-hidden shadow-2xl bg-white">
+          
+          <!-- Header -->
+          <div class="relative z-20 px-6 pt-8 pb-4">
+            <div class="flex items-center justify-between mb-6">
+              <button class="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center transition-smooth hover:scale-105 hover:bg-gray-200" aria-label="Back">
+                <span class="iconify text-gray-800 text-xl" data-icon="solar:arrow-left-bold-duotone"></span>
+              </button>
+              <div class="flex items-center gap-2">
+                <span class="iconify text-gray-400 text-lg" data-icon="solar:calendar-bold-duotone"></span>
+                <span class="font-geist-mono text-xs tracking-wide text-gray-500 uppercase">DSGN402</span>
+              </div>
+            </div>
+            
+            <h1 class="text-2xl font-semibold tracking-tighter text-gray-900 leading-tight">UX Research Sync</h1>
+            <div class="mt-2 flex flex-col gap-0.5">
+              <p class="font-geist-mono text-sm text-gray-500 tracking-wide">Mar 12th — 09:00</p>
+              <p class="font-geist-mono text-sm text-gray-400 tracking-wide">Design Wing — 204</p>
+            </div>
+          </div>
+          
+          <!-- Timeline line + avatars (mid/background) -->
+          <div class="relative flex-1 px-6">
+            <!-- Vertical timeline line -->
+            <div class="absolute right-6 top-0 bottom-24 w-px bg-gray-200"></div>
+            
+            <!-- Overlapping avatar cluster -->
+            <div class="absolute right-3 top-8 flex -space-x-3">
+              <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/b8deab20-79f0-4568-be6e-c4baeded4050_320w.webp" 
+                   alt="Participant" 
+                   class="w-10 h-10 rounded-full border-2 border-white object-cover shadow-sm" 
+                   width="40" height="40">
+              <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/6e807631-f507-40d1-92e2-17f496e11b6b_320w.webp" 
+                   alt="Participant" 
+                   class="w-10 h-10 rounded-full border-2 border-white object-cover shadow-sm" 
+                   width="40" height="40">
+              <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/800c4988-577b-41c6-ab7f-990312f9f0cd_320w.webp" 
+                   alt="Participant" 
+                   class="w-10 h-10 rounded-full border-2 border-white object-cover shadow-sm" 
+                   width="40" height="40">
+            </div>
+            
+            <!-- Floating Peach Card (z-20, offset) -->
+            <div class="relative z-20 mt-16 -ml-2 mr-4">
+              <div class="bg-orange-50 border border-orange-100/50 rounded-2xl p-5 shadow-peach">
+                <div class="flex items-center justify-between mb-4">
+                  <h2 class="font-semibold text-gray-900 tracking-tight">Current Sprints</h2>
+                  <span class="font-geist-mono text-[10px] tracking-widest text-orange-600/80 uppercase">Live</span>
+                </div>
+                
+                <!-- Sprint item 1 -->
+                <div class="flex items-center justify-between py-3 border-b border-orange-100/60">
+                  <div class="flex items-center gap-3">
+                    <div class="w-8 h-8 rounded-full bg-orange-100 flex items-center justify-center">
+                      <span class="iconify text-orange-600 text-sm" data-icon="solar:pen-new-square-bold-duotone"></span>
+                    </div>
+                    <div>
+                      <p class="text-sm font-medium text-gray-900">User Interviews</p>
+                      <p class="font-geist-mono text-[11px] text-gray-500">8 of 12 sessions</p>
+                    </div>
+                  </div>
+                  <span class="font-geist-mono text-xs font-medium text-orange-600">67%</span>
+                </div>
+                
+                <!-- Sprint item 2 -->
+                <div class="flex items-center justify-between py-3">
+                  <div class="flex items-center gap-3">
+                    <div class="w-8 h-8 rounded-full bg-orange-100 flex items-center justify-center">
+                      <span class="iconify text-orange-600 text-sm" data-icon="solar:bookmark-bold-duotone"></span>
+                    </div>
+                    <div>
+                      <p class="text-sm font-medium text-gray-900">Affinity Mapping</p>
+                      <p class="font-geist-mono text-[11px] text-gray-500">3 of 5 boards</p>
+                    </div>
+                  </div>
+                  <span class="font-geist-mono text-xs font-medium text-orange-600">60%</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Bottom section (mt-auto style) -->
+          <div class="mt-auto bg-neutral-500 rounded-t-3xl px-6 pt-6 pb-8">
+            <div class="flex items-center justify-between mb-4">
+              <p class="text-white/90 text-sm font-medium">Upload Research Notes</p>
+              <span class="iconify text-white/60 text-lg" data-icon="solar:upload-bold-duotone"></span>
+            </div>
+            <!-- Dashed upload zone -->
+            <div class="border border-dashed border-white/30 rounded-2xl bg-white/5 hover:bg-white/10 transition-smooth cursor-pointer p-6 flex flex-col items-center justify-center gap-2 min-h-[100px]">
+              <span class="iconify text-white/70 text-2xl" data-icon="solar:add-circle-bold-duotone"></span>
+              <p class="text-white/70 text-xs font-geist-mono tracking-wide">Drop files or click to upload</p>
+            </div>
+          </div>
+        </div>
+        
+        
+        <!-- ==================== SCREEN 2: Immersive Image (Dark) ==================== -->
+        <div class="flex flex-col h-[840px] w-full max-w-sm rounded-3xl relative overflow-hidden shadow-2xl">
+          
+          <!-- Background Image -->
+          <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/67351756-a1a8-4042-926e-9015a7f1e799_1600w.webp" 
+               alt="Design workshop background" 
+               class="absolute inset-0 w-full h-full object-cover opacity-90 z-0"
+               width="384" height="840">
+          
+          <!-- Gradient Overlay -->
+          <div class="absolute inset-0 bg-gradient-to-b from-black/40 via-black/50 to-black/80 z-0"></div>
+          
+          <!-- Top Bar -->
+          <div class="relative z-10 px-5 pt-8 flex items-center justify-between">
+            <button class="w-10 h-10 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center transition-smooth hover:scale-105 hover:bg-white/20" aria-label="Back">
+              <span class="iconify text-white text-xl" data-icon="solar:arrow-left-bold-duotone"></span>
+            </button>
+            
+            <div class="flex items-center gap-2 bg-black/30 backdrop-blur-md rounded-full px-3 py-1.5">
+              <span class="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span>
+              <span class="font-geist-mono text-[11px] text-white/90 tracking-wide">84,209 designers active!</span>
+            </div>
+          </div>
+          
+          <!-- Floating Library Card (centered vertically) -->
+          <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 w-[85%]">
+            <div class="bg-white/90 backdrop-blur-md rounded-2xl p-4 shadow-glass border border-white/40">
+              <div class="flex gap-3">
+                <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/843e481b-cf5e-495f-bc63-2febbc784407_320w.webp" 
+                     alt="Library thumbnail" 
+                     class="w-16 h-16 rounded-xl object-cover flex-shrink-0"
+                     width="64" height="64">
+                <div class="flex-1 min-w-0">
+                  <p class="font-geist-mono text-[10px] tracking-widest text-gray-500 uppercase mb-1">Workshop</p>
+                  <h3 class="text-sm font-semibold text-gray-900 leading-snug tracking-tight">Advanced Prototyping with Figma Variables</h3>
+                  <p class="text-xs text-gray-500 mt-1">Design Wing · Studio B</p>
+                </div>
+              </div>
+              
+              <button class="mt-4 w-full bg-gray-900 text-white text-sm font-medium rounded-full py-2.5 transition-smooth hover:bg-gray-800 hover:scale-[1.02] active:scale-[0.98]">
+                Reserve a Seat
+              </button>
+            </div>
+          </div>
+          
+          <!-- Floating vertical action buttons (right side) -->
+          <div class="absolute right-4 top-1/2 -translate-y-1/2 z-30 flex flex-col gap-3">
+            <button class="w-11 h-11 rounded-full bg-white/15 backdrop-blur-md border border-white/20 flex items-center justify-center transition-smooth hover:scale-110 hover:bg-white/25" aria-label="Bookmark">
+              <span class="iconify text-white text-lg" data-icon="solar:bookmark-bold-duotone"></span>
+            </button>
+            <button class="w-11 h-11 rounded-full bg-white/15 backdrop-blur-md border border-white/20 flex items-center justify-center transition-smooth hover:scale-110 hover:bg-white/25" aria-label="Chat">
+              <span class="iconify text-white text-lg" data-icon="solar:chat-round-dots-bold-duotone"></span>
+            </button>
+            <button class="w-11 h-11 rounded-full bg-white/15 backdrop-blur-md border border-white/20 flex items-center justify-center transition-smooth hover:scale-110 hover:bg-white/25" aria-label="Calendar">
+              <span class="iconify text-white text-lg" data-icon="solar:calendar-add-bold-duotone"></span>
+            </button>
+          </div>
+          
+          <!-- Bottom safe area hint -->
+          <div class="absolute bottom-6 left-0 right-0 z-10 flex justify-center">
+            <div class="w-24 h-1 rounded-full bg-white/30"></div>
+          </div>
+        </div>
+        
+        
+        <!-- ==================== SCREEN 3: Course Details (Grey/White) ==================== -->
+        <div class="flex flex-col h-[840px] w-full max-w-sm rounded-3xl relative overflow-hidden shadow-2xl bg-gray-200">
+          
+          <!-- Top half: White card with rounded bottom -->
+          <div class="relative z-10 bg-white rounded-b-[3rem] pt-8 px-6 pb-10 shadow-sm">
+            <!-- Header -->
+            <div class="flex items-center justify-between mb-6">
+              <button class="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center transition-smooth hover:scale-105 hover:bg-gray-200" aria-label="Back">
+                <span class="iconify text-gray-800 text-xl" data-icon="solar:arrow-left-bold-duotone"></span>
+              </button>
+              <span class="font-geist-mono text-xs tracking-wide text-gray-400 uppercase">Course</span>
+              <button class="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center transition-smooth hover:scale-105 hover:bg-gray-200" aria-label="More">
+                <span class="iconify text-gray-800 text-xl" data-icon="solar:star-bold-duotone"></span>
+              </button>
+            </div>
+            
+            <h1 class="text-2xl font-semibold tracking-tighter text-gray-900 leading-tight mb-1">Interaction Design</h1>
+            <p class="font-geist-mono text-sm text-gray-500 tracking-wide mb-6">Masterclass Series · 2026</p>
+            
+            <!-- Stats row -->
+            <div class="flex gap-4 mb-2">
+              <div class="flex-1 bg-gray-50 rounded-xl p-3 text-center">
+                <p class="font-geist-mono text-[10px] tracking-widest text-gray-400 uppercase">Duration</p>
+                <p class="text-sm font-semibold text-gray-900 mt-0.5">6 Weeks</p>
+              </div>
+              <div class="flex-1 bg-gray-50 rounded-xl p-3 text-center">
+                <p class="font-geist-mono text-[10px] tracking-widest text-gray-400 uppercase">Level</p>
+                <p class="text-sm font-semibold text-gray-900 mt-0.5">Advanced</p>
+              </div>
+              <div class="flex-1 bg-gray-50 rounded-xl p-3 text-center">
+                <p class="font-geist-mono text-[10px] tracking-widest text-gray-400 uppercase">Seats</p>
+                <p class="text-sm font-semibold text-gray-900 mt-0.5">12 left</p>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Floating Dark Profile Card (intentionally offset right-[-40px]) -->
+          <div class="absolute right-[-40px] top-[340px] z-20 w-[280px]">
+            <div class="bg-[#1a1a1a] rounded-2xl p-5 shadow-profile border border-white/10">
+              <div class="flex items-center gap-3 mb-4">
+                <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/1b4169b2-1e5b-4014-a9a6-1785e7867fcd_320w.webp" 
+                     alt="Julian Thorne" 
+                     class="w-12 h-12 rounded-full object-cover border-2 border-white/20"
+                     width="48" height="48">
+                <div>
+                  <h3 class="text-white font-semibold tracking-tight">Julian Thorne</h3>
+                  <p class="font-geist-mono text-[11px] text-white/50 tracking-wide">Lead Instructor</p>
+                </div>
+              </div>
+              
+              <!-- Stats grid -->
+              <div class="grid grid-cols-3 gap-2 mb-5">
+                <div class="text-center">
+                  <p class="text-white font-semibold text-lg">5</p>
+                  <p class="font-geist-mono text-[10px] text-white/40 tracking-wide uppercase">Courses</p>
+                </div>
+                <div class="text-center border-x border-white/10">
+                  <p class="text-white font-semibold text-lg">42</p>
+                  <p class="font-geist-mono text-[10px] text-white/40 tracking-wide uppercase">Projects</p>
+                </div>
+                <div class="text-center">
+                  <p class="text-white font-semibold text-lg">9.9</p>
+                  <p class="font-geist-mono text-[10px] text-white/40 tracking-wide uppercase">Rate</p>
+                </div>
+              </div>
+              
+              <!-- Enrol button with border gradient -->
+              <button class="border-gradient w-full text-white text-sm font-medium rounded-full py-2.5 transition-smooth hover:scale-[1.02] active:scale-[0.98]">
+                Enrol his Courses
+              </button>
+            </div>
+          </div>
+          
+          <!-- Course Schedule (scrollable, no-scrollbar) -->
+          <div class="flex-1 overflow-y-auto no-scrollbar px-6 pt-28 pb-8">
+            <div class="flex items-center justify-between mb-4">
+              <h2 class="text-sm font-semibold text-gray-800 tracking-tight">Course Schedule</h2>
+              <span class="font-geist-mono text-[10px] text-gray-500 tracking-widest uppercase">3 Lessons</span>
+            </div>
+            
+            <div class="space-y-3">
+              <!-- Lesson 01 -->
+              <div class="bg-white rounded-2xl p-4 flex items-center justify-between transition-smooth hover:scale-[1.01] hover:shadow-md cursor-pointer">
+                <div class="flex items-center gap-3">
+                  <div class="w-10 h-10 rounded-xl bg-gray-100 flex items-center justify-center">
+                    <span class="font-geist-mono text-xs font-medium text-gray-600">01</span>
+                  </div>
+                  <div>
+                    <p class="text-sm font-medium text-gray-900">Foundations of Interaction</p>
+                    <p class="font-geist-mono text-[11px] text-gray-500">45 min · Theory</p>
+                  </div>
+                </div>
+                <span class="iconify text-gray-400 text-lg" data-icon="solar:alt-arrow-right-bold-duotone"></span>
+              </div>
+              
+              <!-- Lesson 02 -->
+              <div class="bg-white rounded-2xl p-4 flex items-center justify-between transition-smooth hover:scale-[1.01] hover:shadow-md cursor-pointer">
+                <div class="flex items-center gap-3">
+                  <div class="w-10 h-10 rounded-xl bg-gray-100 flex items-center justify-center">
+                    <span class="font-geist-mono text-xs font-medium text-gray-600">02</span>
+                  </div>
+                  <div>
+                    <p class="text-sm font-medium text-gray-900">Micro-interactions Lab</p>
+                    <p class="font-geist-mono text-[11px] text-gray-500">90 min · Workshop</p>
+                  </div>
+                </div>
+                <span class="iconify text-gray-400 text-lg" data-icon="solar:alt-arrow-right-bold-duotone"></span>
+              </div>
+              
+              <!-- Lesson 03 -->
+              <div class="bg-white rounded-2xl p-4 flex items-center justify-between transition-smooth hover:scale-[1.01] hover:shadow-md cursor-pointer">
+                <div class="flex items-center gap-3">
+                  <div class="w-10 h-10 rounded-xl bg-gray-100 flex items-center justify-center">
+                    <span class="font-geist-mono text-xs font-medium text-gray-600">03</span>
+                  </div>
+                  <div>
+                    <p class="text-sm font-medium text-gray-900">Motion Systems Critique</p>
+                    <p class="font-geist-mono text-[11px] text-gray-500">60 min · Review</p>
+                  </div>
+                </div>
+                <span class="iconify text-gray-400 text-lg" data-icon="solar:alt-arrow-right-bold-duotone"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+      
+      <!-- Caption -->
+      <p class="text-center mt-10 font-geist-mono text-xs tracking-widest text-white/40 uppercase">
+        Aura Mobile Prototyping System · Three-screen interface
+      </p>
+    </div>
+  </div>
+  
+  <!-- Initialize Unicorn Studio -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      if (window.UnicornStudio && typeof UnicornStudio.init === 'function') {
+        UnicornStudio.init().catch(function(err) {
+          console.warn('UnicornStudio init:', err);
+        });
+      }
+    });
+  </script>
+</body>
+</html>
